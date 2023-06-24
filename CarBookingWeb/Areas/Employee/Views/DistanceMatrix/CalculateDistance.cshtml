@@ -1,0 +1,46 @@
+﻿@model CarBooking.Models.DistanceMatrixViewModel
+
+<form asp-action="CalculateDistance" method="post" >
+    <div class="form-group">
+        <label for="origin">Origin:</label>
+        <input type="text" id="origin" name="model.Origin" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="model.Destination" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Calculate Distance</button>
+</form>
+
+
+<div id="result">
+    <h3>Result:</h3>
+    <p>Origin: <span id="origin">@Model.Origin</span></p>
+    <p>Destination: <span id="destination">@Model.Destination</span></p>
+    <p>Distance: <span id="distance">@Model.Distance</span></p>
+    <p>Duration: <span id="duration">@Model.Duration</span></p>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('form').submit(function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        $('#result').html('');
+                        $('#result').append('<h3>Result:</h3>');
+                        $('#result').append('<p>Origin: <span>' + data.origin + '</span></p>');
+                        $('#result').append('<p>Destination: <span>' + data.destination + '</span></p>');
+                        $('#result').append('<p>Distance: <span>' + data.distance + '</span></p>');
+                        $('#result').append('<p>Duration: <span>' + data.duration + '</span></p>');
+                    }
+                });
+            });
+        });
+    </script>
+}
