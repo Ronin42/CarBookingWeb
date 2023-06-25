@@ -45,8 +45,8 @@ namespace BulkyWeb.Areas.Employee.Controllers
                 model.Distance = result.rows[0].elements[0].distance.text;
                 model.Duration = result.rows[0].elements[0].duration.text;
 
-                //return new JsonResult(model);
-                return View(model);
+                return new JsonResult(model);
+                //return View(model);
             }
 
             return View();

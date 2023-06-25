@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="6.0.0-preview1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.8">
@@ -19,11 +21,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\CarBooking.DataAccess\CarBooking.DataAccess.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Areas\Admin\Controllers\" />
-	  <Folder Include="Areas\Admin\Views\" />
+		<ProjectReference Include="..\CarBooking.Utility\CarBooking.Utility.csproj" />
 	</ItemGroup>
 	
 </Project>
