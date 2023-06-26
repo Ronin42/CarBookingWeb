@@ -46,15 +46,22 @@
                             <a class="nav-link text-dark" asp-area="Employee" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Employee" asp-controller="DistanceMatrix" asp-action="CalculateDistance">CalculateDistance</a>
+                            <a class="nav-link text-dark" asp-area="Employee" asp-controller="DistanceMatrix" asp-action="CalculateDistance">คำนวณระยะทาง</a>
                         </li>
                         @if (User.IsInRole(SD.Role_Admin))
                         {
                                 <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Car" asp-action="Index">CalculateDistance</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Car" asp-action="Index">จัดการข้อมูลรถ</a>
                             </li>
                             @*[Authorize(Roles = SD.Role_Admin)] ใส่ในหน้า controller ที่ต้องการ ข้างบน class*@
                         }
+@*                        @if (User.IsInRole(SD.Role_Employee))
+                        {*@
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Employee" asp-controller="Booking" asp-action="Search">Search</a>
+                            </li>
+                        @*}*@
 
                     </ul>
                     <partial name="_LoginPartial" />

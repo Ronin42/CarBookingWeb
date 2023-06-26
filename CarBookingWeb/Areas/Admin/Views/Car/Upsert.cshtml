@@ -1,15 +1,11 @@
 ﻿@model Car
 
 
-@*<div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-8 col-lg-6 col-xl-5">*@
-
 <div class="card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient nl-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Id != 0 ? "แก้ไขข้อมูล" : "เพิ่มรายชื่อ")รถ@(Model.Id != 0 ? "" : "ใหม่")</h2>
+                <h2 class="text-white py-2">@(Model.Id != 0 ? "แก้ไขข้อมูล" : "เพิ่มรายการ")รถ@(Model.Id != 0 ? "" : "ใหม่")</h2>
             </div>
         </div>
     </div>
@@ -36,11 +32,6 @@
                             <input asp-for="TotalSeats" class="form-control border-0 shadow" />
                             <label asp-for="TotalSeats" class="ms-2"></label>
                             <span asp-validation-for="TotalSeats" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="status" class="form-control border-0 shadow" />
-                            <label asp-for="status" class="ms-2"></label>
-                            <span asp-validation-for="status" class="text-danger"></span>
                         </div>
                         <div class="form-floating py-2 col-12">
                             <input asp-for="pricePerKm" class="form-control border-0 shadow" />
@@ -76,9 +67,7 @@
 
     </div>
 </div>
-@*        </div>
-    </div>
-</div>*@
+
 
 
 <!-- โค้ดสำหรับ แสดง invalid แบบ real time-->

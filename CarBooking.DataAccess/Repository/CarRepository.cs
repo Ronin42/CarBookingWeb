@@ -2,6 +2,7 @@
 using CarBooking.DataAccess.Repository;
 using CarBooking.DataAccess.Repository.IRepository;
 using CarBooking.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,27 @@ namespace CarBooking.DataAccess.Repository
             _db = db;
         }
 
+        public IEnumerable<Car> GetMatchingCars(Car CarObj)
+        {
+            IQueryable<Car> query = _db.Cars;
+
+            if (!string.IsNullOrEmpty(CarObj.CarName))
+            {
+                query = query.Where(c => c.CarName.ToLower().Contains(CarObj.CarName.ToLower()));
+            }
+
+            if (CarObj.TotalSeats != null)
+            {
+                query = query.Where(c => c.TotalSeats == CarObj.TotalSeats);
+            }
+
+           
+
+            return query.ToList();
+        }
+
         
+
 
         public void update(Car obj)
         {

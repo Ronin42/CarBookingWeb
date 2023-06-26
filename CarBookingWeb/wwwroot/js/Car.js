@@ -23,7 +23,7 @@ function loadDataTable() {
 
         "columns": [
 
-            { "data": "carName", "width": "20%" },
+            { "data": "carName", "width": "10%" },
 
             { "data": "carType", "width": "10%" },
 
@@ -38,14 +38,54 @@ function loadDataTable() {
                 "render": function (data) {
                     return `<div class=" d-flex btn-group" role="group">
                             <a href="/Admin/Car/Upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>แก้ไข</a>
+                            <a onClick=ToggleFixed('/Admin/Car/ToggleFixed/${data}') class="btn btn-secondary mx-2"><i class="bi bi-pencil-square"></i>ส่งซ่อม</a>
                             <a onClick=Delete('/Admin/Car/Delete/${data}') class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i>ลบข้อมูล</a>
 					    </div>
                         `
                 }
-                ,"width": "30%"
+                ,"width": "40%"
             }
         ]
     });
+}
+
+
+//sweet Alert2 (2) 
+function ToggleFixed(url) {
+    Swal.fire({
+        title: 'คุณแน่ใจหรือไม่?',
+        text: "เมื่อกดยืนยันระบบจะทำการปรับเปลี่ยนสถานะ",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3A3B3C',
+        confirmButtonText: 'ตกลง',
+        cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: url,
+                type: 'PATCH',
+                success: function (data) {
+                    if (data.success) {
+                        dataTable.ajax.reload();
+                        Swal.fire({
+                            title: 'ปรับสถานะการซ่อมสำเร็จ',
+                            text: "สถานะได้ถูกเปลี่ยนแล้ว!",
+                            icon: 'success',
+                            confirmButtonColor: '#3A3B3C',
+                            confirmButtonText: 'รับทราบ'
+
+                        })
+                        //toastr.success(data.message);
+                    }
+                    else {
+                        toastr.error(data.message);
+                    }
+                }
+            })
+        }
+    })
 }
 
 //sweet Alert2 (2) 

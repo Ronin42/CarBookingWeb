@@ -17,6 +17,7 @@ namespace CarBooking.DataAccess.data
 		{
 
 		}
+        public DbSet<BookingOrder> BookingOrders { get; set; }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Car> Cars { get; set; }

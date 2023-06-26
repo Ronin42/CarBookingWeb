@@ -8,12 +8,9 @@ using System.Threading.Tasks;
 
 namespace CarBooking.DataAccess.Repository.IRepository
 {
-    public interface ICarRepository : IRepository<Car>
+    public interface IBookingRepository : IRepository<BookingOrder>
     {
-        IEnumerable<Car> GetMatchingCars(Car CarObj);
-
-        
-        void update(Car obj);
+        void update(BookingOrder obj);
         
     }
 }

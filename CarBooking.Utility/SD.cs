@@ -12,6 +12,10 @@ namespace CarBooking.Utility
         public const string Role_Employee = "Employee";
 
 
+        public const string StatusAvailable = "Available";
+        public const string StatusSeatsRemain = "SeatsRemain";
+        public const string StatusSeatsFully = "SeatsFully";
+        public const string StatusFixed = "Fixed";
     }
 
 }

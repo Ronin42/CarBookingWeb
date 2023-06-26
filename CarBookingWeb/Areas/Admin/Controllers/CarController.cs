@@ -61,9 +61,12 @@ namespace CarBookingWeb.Areas.Admin.Controllers
             {
                 if (CarObj.Id == 0)
                 {
+                    CarObj.status = SD.StatusAvailable;
                     _unitOfWork.CarRepo.Add(CarObj);
 
                     _unitOfWork.Save();
+
+                    
 
                     if (CarObj.TotalSeats > 0)
                     {
@@ -124,6 +127,31 @@ namespace CarBookingWeb.Areas.Admin.Controllers
          public IActionResult GetAll() {
             List<Car> objCarList = _unitOfWork.CarRepo.GetAll().ToList();
             return Json(new { data = objCarList });
+        }
+
+        [HttpPatch]
+        public IActionResult ToggleFixed(int? id)
+        {
+            var CarToBeFixed = _unitOfWork.CarRepo.Get(u => u.Id == id);
+            if (CarToBeFixed == null)
+            {
+                return Json(new { success = false, message = "ไม่สามารถเลือกรายการนี้ได้" });
+            }
+
+            if (CarToBeFixed.status != SD.StatusFixed)
+            {
+                CarToBeFixed.status = SD.StatusFixed;
+            }
+            else
+            {
+                CarToBeFixed.status = SD.StatusAvailable;
+            }
+
+
+            _unitOfWork.CarRepo.update(CarToBeFixed);
+            _unitOfWork.Save();
+
+            return Json(new { success = true, message = "รถคันนี้กำลังส่งซ่อม" });
         }
 
         [HttpDelete]

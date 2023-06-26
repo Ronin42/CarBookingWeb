@@ -12,6 +12,8 @@ namespace CarBooking.DataAccess.Repository.IRepository
 
         ISeatRepository SeatRepo { get; }
 
+        IBookingRepository BookingRepo { get; }
+
         void Save();
     }
 }
