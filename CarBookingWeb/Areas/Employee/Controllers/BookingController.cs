@@ -50,10 +50,12 @@ namespace CarBookingWeb.Areas.Employee.Controllers
         [HttpPost]
         public IActionResult Search(Car CarObj)
         {
-            
-            var cars = _unitOfWork.CarRepo.GetMatchingCars(CarObj);
 
-            ViewData["Cars"] = cars; 
+            var cars = _unitOfWork.CarRepo.GetMatchingCars(CarObj);
+            var displayseat = _unitOfWork.SeatRepo.GetSeatToDisplay(cars);
+
+            ViewData["Cars"] = cars;
+            ViewData["Seat"] = displayseat;
 
             return View();
         }
@@ -69,5 +71,29 @@ namespace CarBookingWeb.Areas.Employee.Controllers
         {
             return View();
         }
+
+        #region API CALLS
+
+        [HttpPatch]
+        public IActionResult seatbooking(int seatId)
+        {
+            var seat = _unitOfWork.SeatRepo.Get(u => u.Id == seatId);
+            
+            if (seat == null)
+            {
+                return Json(new { success = false, message = "ไม่พบที่นั่งที่ระบุ" });
+            }
+
+            seat.IsAvailable = !seat.IsAvailable;
+            _unitOfWork.SeatRepo.update(seat);
+            _unitOfWork.Save();
+
+            return Json(new { success = true, message = "อัปเดตสถานะเรียบร้อยแล้ว" });
+            
+
+        }
+
+        #endregion
+
     }
 }

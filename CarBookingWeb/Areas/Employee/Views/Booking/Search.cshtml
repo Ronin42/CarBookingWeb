@@ -86,21 +86,38 @@
                             <p class="card-text">Car Type: @car.CarType</p>
                             <p class="card-text">Total Seats: @car.TotalSeats</p>
                             <p class="card-text">Status: @car.status</p>
-                            @*<div class="row">
-                                @foreach (var seat in car.Seats)
+                            <div class="pl-1">
+                                <div class="d-flex flex-wrap">
+                            @if (ViewData["Seat"] != null)
+                            {
+                               
+                                foreach (var seat in (IEnumerable<Seat>)ViewData["Seat"])
                                 {
-                                    <div class="col-2">
-                                        @if (seat.IsAvailable)
-                                        {
-                                            <button type="button" class="btn btn-success btn-sm">@seat.SeatCode</button>
-                                        }
-                                        else
-                                        {
-                                            <button type="button" class="btn btn-danger btn-sm" disabled>@seat.SeatCode</button>
-                                        }
-                                    </div>
+                                        
+                                    if (@seat.CarId == @car.Id)
+                                    {
+                                            <div class="mx-2 mb-2">
+                                                    <button type="button" class="btn  @(seat.IsAvailable ? "btn-success seat-toggle" : "btn-danger seat-toggle")" data-seat-id="@seat.Id" onclick="seatbooking('@Url.Action("seatbooking", "Booking")', @seat.Id)">
+                                                        @seat.SeatCode
+                                                    </button>
+
+                                                    @*<a onClick=ToggleFixed('/Employee/Booking/seatbooking/@seat.Id') class="btn @(seat.IsAvailable ? "btn-success seat-toggle" : "btn-danger seat-toggle") btn-sm"><i class="bi bi-pencil-square"></i>@seat.SeatCode</a>*@
+                                                @*@if (seat.IsAvailable)
+                                                {
+                                                   <button id="@seat.Id" type="button" class="btn btn-success btn-sm">@seat.SeatCode</button>
+                                                }
+                                                else
+                                                {
+                                                   <button id="@seat.Id" type="button" class="btn btn-danger btn-sm" disabled>@seat.SeatCode</button>
+                                                }*@
+                                            </div>
+                                    }
+                                
                                 }
-                            </div>*@
+                                
+                            }
+                                </div>
+                            </div>
                         </div>
                 </div>
             </div>
@@ -120,7 +137,7 @@
 <!-- โค้ดสำหรับ แสดง invalid แบบ real time-->
 @section Scripts{
     @{
-
-        <partial name="_ValidationScriptsPartial" />
+        <script src="~/js/SeatButton.js"></script>
+        //<partial name="_ValidationScriptsPartial" />
     }
 }

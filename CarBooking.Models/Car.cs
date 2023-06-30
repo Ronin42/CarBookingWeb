@@ -27,8 +27,8 @@ namespace CarBooking.Models
 
         public float?  pricePerKm { get; set; }  //ราคาต่อระยะทาง()
 
-        [ValidateNever]
-        public ICollection<Seat> Seats { get; set; }
+       
+        
     }
    
 }

@@ -10,8 +10,11 @@ namespace CarBooking.DataAccess.Repository.IRepository
 {
     public interface ISeatRepository : IRepository<Seat>
     {
-        //Task GenerateSeats(Car car);
+       
         void update(Seat obj);
-        
+
+        IEnumerable<Seat> GetSeatToDisplay(IEnumerable<Car> cars);
+
+
     }
 }

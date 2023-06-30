@@ -18,27 +18,44 @@ namespace CarBooking.DataAccess.Repository
         {
             _db = db;
         }
+        public IEnumerable<Seat> GetSeatToDisplay(IEnumerable<Car> cars)
+        {
+            List<Seat> seats = new List<Seat>();
 
-        //public async Task GenerateSeats(Car car)
+            foreach (var car in cars)
+            {
+                var matchingSeats = _db.Seats.Where(s => s.CarName.ToLower().Contains(car.CarName.ToLower()));
+                seats.AddRange(matchingSeats);
+            }
+
+            return seats;
+        }
+
+        //public IEnumerable<Seat> GetSeatToDisplay(List<Car> carObj)
         //{
-        //    // Generate seats for the car
-        //    List<Seat> seats = new List<Seat>();
+        //    List<Seat> seatsToDisplay = new List<Seat>();
 
-        //    for (int i = 1; i <= car.TotalSeats; i++)
+        //    foreach (var car in carObj)
         //    {
-        //        Seat seat = new Seat
-        //        {
-        //            CarId = car.Id,
-        //            SeatCode = car.CarName + "_" + i.ToString(),
+        //        IQueryable<Seat> query = _db.Seats;
 
-        //        };
+        //        query = query.Where(s => s.CarName.ToLower().Contains(car.CarName.ToLower()));
 
-        //        seats.Add(seat);
+        //        seatsToDisplay.AddRange(query.ToList());
         //    }
 
-        //    // Save the generated seats to the database
-        //    await _db.Seats.AddRangeAsync(seats);
-        //    await _db.SaveChangesAsync();
+        //    return seatsToDisplay;
+        //}
+
+        //public IEnumerable<Seat> GetSeatToDisplay(Car CarObj)
+        //{
+
+        //    IQueryable<Seat> query = _db.Seats;
+
+
+        //    query = query.Where(c => c.CarName.ToLower().Contains(CarObj.CarName.ToLower()));
+
+        //    return query.ToList();
         //}
 
         public void update(Seat obj)

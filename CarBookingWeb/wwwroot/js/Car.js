@@ -35,10 +35,13 @@ function loadDataTable() {
 
             {
                 "data": "id",
-                "render": function (data) {
+                "render": function (data, row) {
+                    var buttonLabel = row.status === 'Fixed' ? 'ซ่อมเสร็จแล้ว' : 'แจ้งซ่อม';
+                    var buttonClass = row.status === 'Fixed' ?  'btn-danger': 'btn-warning';
                     return `<div class=" d-flex btn-group" role="group">
                             <a href="/Admin/Car/Upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>แก้ไข</a>
-                            <a onClick=ToggleFixed('/Admin/Car/ToggleFixed/${data}') class="btn btn-secondary mx-2"><i class="bi bi-pencil-square"></i>ส่งซ่อม</a>
+                             <a onClick=ToggleFixed('/Admin/Car/ToggleFixed/${data}') class="btn ${buttonClass} mx-2"><i class="bi bi-pencil-square"></i>${buttonLabel}</a>
+                            
                             <a onClick=Delete('/Admin/Car/Delete/${data}') class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i>ลบข้อมูล</a>
 					    </div>
                         `
@@ -77,7 +80,8 @@ function ToggleFixed(url) {
                             confirmButtonText: 'รับทราบ'
 
                         })
-                        //toastr.success(data.message);
+                        
+
                     }
                     else {
                         toastr.error(data.message);
