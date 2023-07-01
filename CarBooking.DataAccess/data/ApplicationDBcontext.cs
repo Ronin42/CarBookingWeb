@@ -22,5 +22,14 @@ namespace CarBooking.DataAccess.data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Seat> Seats { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Car>()
+                .Property(c => c.BookedSeats)
+                .HasDefaultValue(0);
+        }
     }
 }

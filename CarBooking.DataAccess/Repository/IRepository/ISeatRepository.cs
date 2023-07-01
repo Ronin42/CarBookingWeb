@@ -13,6 +13,8 @@ namespace CarBooking.DataAccess.Repository.IRepository
        
         void update(Seat obj);
 
+        IEnumerable<Seat> GetSeat(int car);
+
         IEnumerable<Seat> GetSeatToDisplay(IEnumerable<Car> cars);
 
 

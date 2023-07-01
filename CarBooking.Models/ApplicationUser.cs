@@ -12,6 +12,8 @@ namespace CarBooking.Models
 {
     public class ApplicationUser : IdentityUser
     {
+
+
         [Required]
         public string? Name { get; set; }
         public string? Position { get; set; }

@@ -1,17 +1,20 @@
 ﻿@model CarBooking.Models.DistanceMatrixViewModel
 
-<form asp-action="CalculateDistance" method="post" >
-    <div class="form-group">
-        <label for="origin">Origin:</label>
-        <input type="text" id="origin" name="model.Origin" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="destination">Destination:</label>
-        <input type="text" id="destination" name="model.Destination" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Calculate Distance</button>
-</form>
 
+<
+<body onload="initAutocomplete()">
+    <form method="post">
+        <div class="form-group">
+            <label for="origin">Origin:</label>
+            <input type="text" id="origin" name="model.Origin" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="model.Destination" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Calculate Distance</button>
+    </form>
+</body>
 
 <div id="result">
     <h3>Result:</h3>
@@ -23,24 +26,13 @@
 
 @section Scripts {
     <script>
-        $(document).ready(function () {
-            $('form').submit(function (e) {
-                e.preventDefault();
+        function initAutocomplete() {
+            var originInput = document.getElementById('origin');
+            var destinationInput = document.getElementById('destination');
 
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        $('#result').html('');
-                        $('#result').append('<h3>Result:</h3>');
-                        $('#result').append('<p>Origin: <span>' + data.origin + '</span></p>');
-                        $('#result').append('<p>Destination: <span>' + data.destination + '</span></p>');
-                        $('#result').append('<p>Distance: <span>' + data.distance + '</span></p>');
-                        $('#result').append('<p>Duration: <span>' + data.duration + '</span></p>');
-                    }
-                });
-            });
-        });
+            var originAutocomplete = new google.maps.places.Autocomplete(originInput);
+            var destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput);
+        }
     </script>
+
 }

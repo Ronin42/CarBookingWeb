@@ -35,9 +35,9 @@ function loadDataTable() {
 
             {
                 "data": "id",
-                "render": function (data,type , row) {
+                "render": function (data, type, row) {
                     var buttonLabel = row.status === 'Fixed' ? 'ซ่อมเสร็จแล้ว' : 'แจ้งซ่อม';
-                    var buttonClass = row.status === 'Fixed' ?  'btn-danger': 'btn-warning';
+                    var buttonClass = row.status === 'Fixed' ? 'btn-danger' : 'btn-warning';
                     return `<div class=" d-flex btn-group" role="group">
                             <a href="/Admin/Car/Upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>แก้ไข</a>
                              <a onClick=ToggleFixed('/Admin/Car/ToggleFixed/${data}') class="btn ${buttonClass} mx-2"><i class="bi bi-pencil-square"></i>${buttonLabel}</a>
@@ -46,50 +46,10 @@ function loadDataTable() {
 					    </div>
                         `
                 }
-                ,"width": "40%"
+                , "width": "40%"
             }
         ]
     });
-}
-
-
-//sweet Alert2 (2) 
-function ToggleFixed(url) {
-    Swal.fire({
-        title: 'คุณแน่ใจหรือไม่?',
-        text: "เมื่อกดยืนยันระบบจะทำการปรับเปลี่ยนสถานะ",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3A3B3C',
-        confirmButtonText: 'ตกลง',
-        cancelButtonText: 'ยกเลิก'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: url,
-                type: 'PATCH',
-                success: function (data) {
-                    if (data.success) {
-                        dataTable.ajax.reload();
-                        Swal.fire({
-                            title: 'ปรับสถานะการซ่อมสำเร็จ',
-                            text: "สถานะได้ถูกเปลี่ยนแล้ว!",
-                            icon: 'success',
-                            confirmButtonColor: '#3A3B3C',
-                            confirmButtonText: 'รับทราบ'
-
-                        })
-                        
-
-                    }
-                    else {
-                        toastr.error(data.message);
-                    }
-                }
-            })
-        }
-    })
 }
 
 //sweet Alert2 (2) 

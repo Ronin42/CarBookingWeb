@@ -1,83 +1,93 @@
 ﻿@model Car
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- ส่วนทางซ้าย - Form -->
+            <div class="card shadow border-0 mt-4">
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2 class="text-center">หน้าจองรถ</h2>
+                            <form method="post" class="row" enctype="multipart/form-data">
+                                <input asp-for="Id" hidden />
 
-<div class="card shadow border-0 mt-4">
-    <div class="card-header bg-secondary bg-gradient nl-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">หน้าจองรถ</h2>
-           </div>
-        </div>
-    </div>
-    <div class="card-body p-4">
-        <form method="post" class="row" enctype="multipart/form-data">
-            <input asp-for="Id" hidden />
 
-            <div class="row">
-                <div class="col-12">
+                                <div class="form-floating mb-3 col-md-6">
+                                    <input asp-for="CarName" class="form-control border-0 shadow" />
+                                    <label asp-for="CarName" class="ms-2"></label>
+                                    <span asp-validation-for="CarName" class="text-danger"></span>
+                                </div>
+                                <div class="form-floating mb-3 col-md-6">
+                                    <input asp-for="CarType" class="form-control border-0 shadow" />
+                                    <label asp-for="CarType" class="ms-2"></label>
+                                    <span asp-validation-for="CarType" class="text-danger"></span>
+                                </div>
 
-                   <div class="border p-3">
-                         <div class="form-floating py-2 col-12">
-                            <input asp-for="CarName" class="form-control border-0 shadow" />
-                            <label asp-for="CarName" class="ms-2"></label>
-                            <span asp-validation-for="CarName" class="text-danger"></span>
+                                <div class="form-floating mb-3 col-md-6">
+
+                                    <input asp-for="Origin" class="form-control border-0 shadow" />
+                                    <label asp-for="Origin" class="ms-2"></label>
+                                </div>
+
+                                <div class="form-floating mb-3 col-md-6">
+
+                                    <input asp-for="Destination" class="form-control border-0 shadow" />
+                                    <label asp-for="Destination" class="ms-2"></label>
+                                </div>
+
+                                <div class="form-floating mb-3 col-md-6">
+                                    <input asp-for="Startdatetime" type="datetime-local" class="form-control border-0 shadow" />
+                                    <label asp-for="Startdatetime" class="ms-2"></label>
+                                </div>
+                                <div class="form-floating mb-3 col-md-6">
+                                    <input asp-for="Returndatetime" type="datetime-local" class="form-control border-0 shadow" />
+                                    <label asp-for="Returndatetime" class="ms-2"></label>
+                                </div>
+
+
+                                <div class="form-floating mb-3 col-md-6">
+                                    <input asp-for="TotalSeats" class="form-control border-0 shadow" />
+                                    <label asp-for="TotalSeats" class="ms-2"></label>
+                                    <span asp-validation-for="TotalSeats" class="text-danger"></span>
+                                </div>
+
+                                <div class="row pt-3">
+                                    <div class="col-6 col-md-6 mx-auto">
+
+                                        <button type="submit" class="btn btn-outline-success form-control">ค้นหา</button>
+
+                                    </div>
+                                    <div class="col-6 col-md-6 mx-auto">
+                                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary form-control">กลับสู่หน้าเมนู</a>
+                                    </div>
+
+                                </div>
+                                <div asp-validation-summary="All"></div> <!-- แสดง inValid ทั้งหมด -->
+
+
+
+
+
+                            </form>
+
                         </div>
-                        @*<div class="form-floating py-2 col-12">
-                            <input asp-for="DistanceMatrixViewModel.Origin" class="form-control border-0 shadow" />
-                            <label asp-for="DistanceMatrixViewModel.Origin" class="ms-2"></label>
-                            <span asp-validation-for="DistanceMatrixViewModel.Origin" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="DistanceMatrixViewModel.Destination" class="form-control border-0 shadow" />
-                            <label asp-for="DistanceMatrixViewModel.Destination" class="ms-2"></label>
-                            <span asp-validation-for="DistanceMatrixViewModel.Destination" class="text-danger"></span>
-                        </div>*@
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="CarType" class="form-control border-0 shadow" />
-                            <label asp-for="CarType" class="ms-2"></label>
-                            <span asp-validation-for="CarType" class="text-danger"></span>
-                        </div>
-                        <div class="form-floating py-2 col-12">
-                            <input asp-for="TotalSeats" class="form-control border-0 shadow" />
-                            <label asp-for="TotalSeats" class="ms-2"></label>
-                            <span asp-validation-for="TotalSeats" class="text-danger"></span>
-                        </div>
-                        @*<div class="form-floating py-2 col-12">
-                            <input asp-for="Car.pricePerKm" class="form-control border-0 shadow" />
-                            <label asp-for="Car.pricePerKm" class="ms-2"></label>
-                            <span asp-validation-for="Car.pricePerKm" class="text-danger"></span>
-                        </div>*@
-
-
-                        <div class="row pt-3">
-                            <div class="col-6 col-md-6 mx-auto">
- 
-                                    <button type="submit" class="btn btn-outline-success form-control">ค้นหา</button>
-
-                            </div>
-                            <div class="col-6 col-md-6 mx-auto">
-                                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary form-control">กลับสู่หน้าเมนู</a>
-                            </div>
-
-                        </div>
-                        <div asp-validation-summary="All"></div> <!-- แสดง inValid ทั้งหมด -->
                     </div>
                 </div>
-
             </div>
+        </div>
 
-        </form>
-
-    </div>
-</div>
-
+<div class="col-md-6">
+    <!-- ส่วนทางขวา - Card -->
+    <div class="card shadow border-0 mt-4">
+        <div class="card-body p-4">
 <div class="row">
     @if (ViewData["Cars"] != null)
     {
-        
+
         foreach (var car in (IEnumerable<Car>)ViewData["Cars"])
         {
-            @if (@car.status != SD.StatusFixed || @car.status != SD.StatusSeatsFully)
+            @if (@car.status != SD.StatusFixed && @car.status != SD.StatusSeatsFully)
             {
                 <div class="col-12">
                     <div class="card mb-3">
@@ -85,42 +95,36 @@
                             <h5 class="card-title">@car.CarName</h5>
                             <p class="card-text">Car Type: @car.CarType</p>
                             <p class="card-text">Total Seats: @car.TotalSeats</p>
+                            <p class="card-text">Booked Seats: @car.BookedSeats</p>
                             <p class="card-text">Status: @car.status</p>
                             <div class="pl-1">
                                 <div class="d-flex flex-wrap">
-                            @if (ViewData["Seat"] != null)
-                            {
-                               
-                                foreach (var seat in (IEnumerable<Seat>)ViewData["Seat"])
-                                {
-                                        
-                                    if (@seat.CarId == @car.Id)
+                                    @if (ViewData["Seat"] != null)
                                     {
-                                            <div class="mx-2 mb-2">
+
+                                        foreach (var seat in (IEnumerable<Seat>)ViewData["Seat"])
+                                        {
+
+                                            if (@seat.CarId == @car.Id)
+                                            {
+                                                <div class="mx-2 mb-2">
                                                     <button type="button" class="btn  @(seat.IsAvailable ? "btn-success seat-toggle" : "btn-danger seat-toggle")" data-seat-id="@seat.Id" onclick="seatbooking('@Url.Action("seatbooking", "Booking")', @seat.Id)">
                                                         @seat.SeatCode
                                                     </button>
 
-                                                    @*<a onClick=ToggleFixed('/Employee/Booking/seatbooking/@seat.Id') class="btn @(seat.IsAvailable ? "btn-success seat-toggle" : "btn-danger seat-toggle") btn-sm"><i class="bi bi-pencil-square"></i>@seat.SeatCode</a>*@
-                                                @*@if (seat.IsAvailable)
-                                                {
-                                                   <button id="@seat.Id" type="button" class="btn btn-success btn-sm">@seat.SeatCode</button>
-                                                }
-                                                else
-                                                {
-                                                   <button id="@seat.Id" type="button" class="btn btn-danger btn-sm" disabled>@seat.SeatCode</button>
-                                                }*@
-                                            </div>
+                                                </div>
+                                            }
+
+                                        }
+
                                     }
-                                
-                                }
-                                
-                            }
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
-            </div>
+
+
             }
         }
     }
@@ -132,12 +136,25 @@
     }
 </div>
 
+        </div>
+    </div>
+</div>
 
+        
+    </div>
+</div>
 
 <!-- โค้ดสำหรับ แสดง invalid แบบ real time-->
 @section Scripts{
     @{
+        <script>
+            function getDateTime() {
+                var dateTimePicker = document.getElementById("dateTimePicker");
+                var selectedDateTime = dateTimePicker.value;
+                alert("วันที่และเวลาที่เลือก: " + selectedDateTime);
+            }
+        </script>
         <script src="~/js/SeatButton.js"></script>
         //<partial name="_ValidationScriptsPartial" />
     }
-}
+    }

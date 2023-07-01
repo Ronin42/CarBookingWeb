@@ -20,9 +20,10 @@ namespace CarBooking.DataAccess.Repository
         {
             _db = db;
             this.dbSet = _db.Set<T>();
-            _db.Seats.Include(u => u.Car); //for connect foreignkey auto
-            //_db.Products.Include(u => u.Category); //for connect foreignkey auto
-            //_db.ApplicationUsers.Include(u => u.Company); //for connect foreignkey auto
+            //for connect foreignkey auto
+            _db.Seats.Include(u => u.Car);
+            
+
         }
 
         public void Add(T entity)

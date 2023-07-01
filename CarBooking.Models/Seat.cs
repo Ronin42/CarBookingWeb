@@ -22,5 +22,7 @@ namespace CarBooking.Models
         public string? CarName { get; set; }
         public bool IsAvailable { get; set; } = true;
 
+        
+
     }
 }

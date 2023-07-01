@@ -33,7 +33,11 @@ namespace CarBooking.DataAccess.Repository
                 query = query.Where(c => c.TotalSeats == CarObj.TotalSeats);
             }
 
-           
+            if (CarObj.CarType != null)
+            {
+                query = query.Where(c => c.CarType.ToLower().Contains(CarObj.CarType.ToLower()));
+            }
+
 
             return query.ToList();
         }

@@ -18,6 +18,8 @@ namespace Bulky.DataAccess.Repository
 
         public IBookingRepository BookingRepo { get; private set; }
 
+        public IApplicationUserRepository UserRepo { get; private set; }
+
         //get; private set;: การกำหนดการเข้าถึงค่าของคุณสมบัติ productRepo โดยมีการกำหนด
         //get ให้สามารถอ่านค่าได้
         //และ private set ที่บังคับให้สามารถกำหนดค่าได้เฉพาะภายในคลาสเท่านั้น นั่นหมายความว่าค่าของ productRepo สามารถเข้าถึงได้จากภายนอก
@@ -28,6 +30,7 @@ namespace Bulky.DataAccess.Repository
             _db = db;
             CarRepo = new CarRepository(_db);
             SeatRepo = new SeatRepository(_db);
+            UserRepo = new ApplicationUserRepository(_db);
             BookingRepo = new BookingRepository(_db);
 
         }

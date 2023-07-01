@@ -10,8 +10,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Runtime.ConstrainedExecution;
+using System.Security.Claims;
 using System.Xml.XPath;
 
 namespace CarBookingWeb.Areas.Admin.Controllers
@@ -132,20 +134,44 @@ namespace CarBookingWeb.Areas.Admin.Controllers
         [HttpPatch]
         public IActionResult ToggleFixed(int? id)
         {
-            var CarToBeFixed = _unitOfWork.CarRepo.Get(u => u.Id == id);
+            Car CarToBeFixed = _unitOfWork.CarRepo.Get(u => u.Id == id);
             if (CarToBeFixed == null)
             {
                 return Json(new { success = false, message = "ไม่สามารถเลือกรายการนี้ได้" });
             }
 
+            
+
             if (CarToBeFixed.status != SD.StatusFixed)
             {
+                CarToBeFixed.BookedSeats = 0;
                 CarToBeFixed.status = SD.StatusFixed;
+
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var userid = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                IEnumerable<Seat> seats = _unitOfWork.SeatRepo.GetSeat(CarToBeFixed.Id);
+                 
+
+                foreach (Seat seat in seats)
+                {
+                    seat.IsAvailable = true;
+                    BookingOrder orderFromDb = _unitOfWork.BookingRepo.Get(u => u.ApplicationUserId == userid && u.SeatId == seat.Id);
+
+                    if(orderFromDb != null && orderFromDb.SeatId == seat.Id)
+                    {
+                        _unitOfWork.BookingRepo.Remove(orderFromDb);
+                        _unitOfWork.SeatRepo.update(seat);
+                    }
+                    
+                }
+
             }
             else
             {
                 CarToBeFixed.status = SD.StatusAvailable;
-            }
+               
+            }   
 
 
             _unitOfWork.CarRepo.update(CarToBeFixed);

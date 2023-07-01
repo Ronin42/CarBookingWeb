@@ -15,12 +15,12 @@ namespace CarBooking.Models
         [ForeignKey("SeatId")]
         [ValidateNever]
         public int SeatId { get; set; }
-        public Seat Seat { get; set; }
+        public Seat? Seat { get; set; }
 
         [ForeignKey("ApplicationUserId")]
         [ValidateNever]
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public string? ApplicationUserId { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
 
 
     }
