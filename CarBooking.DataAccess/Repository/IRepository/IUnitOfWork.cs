@@ -14,6 +14,10 @@ namespace CarBooking.DataAccess.Repository.IRepository
 
         IBookingRepository BookingRepo { get; }
 
+        void DisableIdentityInsert(string tableName);
+
+        void EnableIdentityInsert(string tableName);
+
         void Save();
     }
 }

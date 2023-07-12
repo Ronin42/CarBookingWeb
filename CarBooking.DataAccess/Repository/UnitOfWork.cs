@@ -1,6 +1,7 @@
 ﻿using CarBooking.DataAccess.data;
 using CarBooking.DataAccess.Repository;
 using CarBooking.DataAccess.Repository.IRepository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,18 @@ namespace Bulky.DataAccess.Repository
             BookingRepo = new BookingRepository(_db);
 
         }
-      
+
+        public void EnableIdentityInsert(string tableName)
+        {
+            string sql = $"SET IDENTITY_INSERT {tableName} ON";
+            _db.Database.ExecuteSqlRaw(sql);
+        }
+
+        public void DisableIdentityInsert(string tableName)
+        {
+            string sql = $"SET IDENTITY_INSERT {tableName} OFF";
+            _db.Database.ExecuteSqlRaw(sql);
+        }
 
         public void Save()
         {

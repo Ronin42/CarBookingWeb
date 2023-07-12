@@ -36,8 +36,8 @@ function loadDataTable() {
             {
                 "data": "id",
                 "render": function (data,type , row) {
-                    var buttonLabel = row.status === 'Fixed' ? 'ซ่อมเสร็จแล้ว' : 'แจ้งซ่อม';
-                    var buttonClass = row.status === 'Fixed' ?  'btn-danger': 'btn-warning';
+                    var buttonLabel = row.status === 'กำลังส่งซ่อม' ? 'ซ่อมเสร็จแล้ว' : 'แจ้งซ่อม';
+                    var buttonClass = row.status === 'กำลังส่งซ่อม' ?  'btn-danger': 'btn-warning';
                     return `<div class=" d-flex btn-group" role="group">
                             <a href="/Admin/Car/Upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>แก้ไข</a>
                              <a onClick=ToggleFixed('/Admin/Car/ToggleFixed/${data}') class="btn ${buttonClass} mx-2"><i class="bi bi-pencil-square"></i>${buttonLabel}</a>

@@ -32,7 +32,7 @@ namespace BulkyWeb.Areas.Employee.Controllers
                 return View(model);
             }
 
-            string apiKey = "AIzaSyBQSEFFEy-zIpxJ2NlSXf6sn0rg9TnG6CI";
+            string apiKey = "AIzaSyDc4j_VNbQIuJX62STIvVu51ODS1LUlMd0";
 
             string apiUrl = $"https://maps.googleapis.com/maps/api/distancematrix/json?origins={model.Origin}&destinations={model.Destination}&key={apiKey}";
 

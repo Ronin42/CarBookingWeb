@@ -22,6 +22,8 @@ namespace CarBooking.DataAccess.Repository
         public IEnumerable<Car> GetMatchingCars(Car CarObj)
         {
             IQueryable<Car> query = _db.Cars;
+            
+
 
             if (!string.IsNullOrEmpty(CarObj.CarName))
             {
@@ -37,6 +39,11 @@ namespace CarBooking.DataAccess.Repository
             {
                 query = query.Where(c => c.CarType.ToLower().Contains(CarObj.CarType.ToLower()));
             }
+
+            
+
+
+            
 
 
             return query.ToList();

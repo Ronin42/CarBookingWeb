@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarBooking.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDBcontext))]
-    [Migration("20230630034852_AddBookedSeatsToCardb")]
-    partial class AddBookedSeatsToCardb
+    [Migration("20230704152214_removeFKinbookingorder")]
+    partial class removeFKinbookingorder
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,6 @@ namespace CarBooking.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApplicationUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("SeatId")
@@ -57,14 +56,34 @@ namespace CarBooking.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BookedSeats")
-                        .HasColumnType("int");
+                    b.Property<int>("BookedSeats")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("CarName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CarType")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Destination")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Displayorder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Distance")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Origin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Returndatetime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("Startdatetime")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("TotalSeats")
                         .HasColumnType("int");
@@ -334,9 +353,7 @@ namespace CarBooking.DataAccess.Migrations
                 {
                     b.HasOne("CarBooking.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("CarBooking.Models.Seat", "Seat")
                         .WithMany()

@@ -11,6 +11,7 @@ namespace CarBooking.Models
 {
     public class BookingOrder
     {
+        [Key]
         public int Id { get; set; }
         [ForeignKey("SeatId")]
         [ValidateNever]

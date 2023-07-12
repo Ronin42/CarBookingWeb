@@ -56,6 +56,7 @@ namespace CarBookingWeb.Areas.Admin.Controllers
             }
 
         }
+
         [HttpPost]
         public IActionResult Upsert(Car CarObj)
         {
@@ -68,7 +69,6 @@ namespace CarBookingWeb.Areas.Admin.Controllers
 
                     _unitOfWork.Save();
 
-                    
 
                     if (CarObj.TotalSeats > 0)
                     {
@@ -104,7 +104,7 @@ namespace CarBookingWeb.Areas.Admin.Controllers
                         _unitOfWork.SeatRepo.Add(seat);
                     }
 
-
+                    CarObj.status = SD.StatusAvailable;
                     _unitOfWork.CarRepo.update(CarObj);
 
 
@@ -146,24 +146,27 @@ namespace CarBookingWeb.Areas.Admin.Controllers
             {
                 CarToBeFixed.BookedSeats = 0;
                 CarToBeFixed.status = SD.StatusFixed;
-
-                var claimsIdentity = (ClaimsIdentity)User.Identity;
-                var userid = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                CarToBeFixed.Startdatetime = null;
+                CarToBeFixed.Returndatetime = null;
+                CarToBeFixed.Origin = null;
+                CarToBeFixed.Destination = null;
+                CarToBeFixed.Distance = null;
 
                 IEnumerable<Seat> seats = _unitOfWork.SeatRepo.GetSeat(CarToBeFixed.Id);
                  
-
+                //รีเซ็ต Bookingorder รายการจองของรถคันนี้ทั้งหมด 
                 foreach (Seat seat in seats)
                 {
                     seat.IsAvailable = true;
-                    BookingOrder orderFromDb = _unitOfWork.BookingRepo.Get(u => u.ApplicationUserId == userid && u.SeatId == seat.Id);
+                    
+                    BookingOrder orderFromDb = _unitOfWork.BookingRepo.Get(u => u.SeatId == seat.Id);
 
-                    if(orderFromDb != null && orderFromDb.SeatId == seat.Id)
+                    if (orderFromDb != null && orderFromDb.SeatId == seat.Id)
                     {
                         _unitOfWork.BookingRepo.Remove(orderFromDb);
                         _unitOfWork.SeatRepo.update(seat);
                     }
-                    
+
                 }
 
             }

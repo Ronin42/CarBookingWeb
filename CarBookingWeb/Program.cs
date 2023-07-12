@@ -23,6 +23,9 @@ builder.Services.ConfigureApplicationCookie(options =>
     //options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
 
+
+
+
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>(); //#UnitOfWork
@@ -54,6 +57,6 @@ app.MapRazorPages();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{area=Employee}/{controller=Home}/{action=Index}/{id?}");
+	pattern: "{area=Employee}/{controller=Booking}/{action=Search}/{id?}");
 
 app.Run();

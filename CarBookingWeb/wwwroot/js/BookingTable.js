@@ -17,7 +17,7 @@ function loadDataTable() {
 
         "ajax": {
 
-            "url": "/Admin/car/getall"
+            "url": "/Employee/booking/getall"
 
         },
 

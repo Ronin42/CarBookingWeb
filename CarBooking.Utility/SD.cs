@@ -12,10 +12,10 @@ namespace CarBooking.Utility
         public const string Role_Employee = "Employee";
 
 
-        public const string StatusAvailable = "Available";
-        public const string StatusSeatsRemain = "SeatsRemain";
-        public const string StatusSeatsFully = "SeatsFully";
-        public const string StatusFixed = "Fixed";
+        public const string StatusAvailable = "ว่างพร้อมใช้งาน";
+        public const string StatusSeatsRemain = "มีที่ว่างเหลือ";
+        public const string StatusSeatsFully = "จองเต็มแล้ว";
+        public const string StatusFixed = "กำลังส่งซ่อม";
     }
 
 }

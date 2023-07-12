@@ -22,7 +22,7 @@ namespace CarBooking.DataAccess.Repository
             this.dbSet = _db.Set<T>();
             //for connect foreignkey auto
             _db.Seats.Include(u => u.Car);
-            
+
 
         }
 
